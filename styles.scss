@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -24,22 +92,35 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
 body {
 	line-height: 1;
 }
-ol, ul {
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
 	content: none;
 }
 table {
@@ -49,6 +130,9 @@ table {
 
 /* ++++++++++++++++++++++++++++++++++++++ */
 
+.main {
+	background-color: #11111115;
+}
 
 .main {
 	height: 100vh;
@@ -56,113 +140,170 @@ table {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	.board {
+		width: 800px;
+		height: 800px;
+		display: flex;
+		flex-direction: column;
+
+		.row {
+			height: calc(800px / 8);
+			width: 100%;
+			display: flex;
+			justify-content: center;
+
+			.square {
+				font-size: 3em;
+				width: calc(800px / 8);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				text-align: center;
+				z-index: -2;
+			}
+		}
+	}
 }
 
-.board {
-	width: 800px;
-	height: 800px;
-	border: 2px black solid;
-	display: flex;
-	flex-direction: column;
-}
-
-.row {
-	height: calc(800px/8);
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-
-.square {
-	font-size: 3em;
-	width: calc(800px/8);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-	text-align: center;
-	z-index: -2;
-}
-
-.line {
-    position: absolute;
-	width: 2px;
-	height: 50%;
-	bottom: 0;
-	z-index: -1;
-	background: #000;
-}
-
-.top-left {
-    position: absolute;
-	width: 50%;
-	height: 50%;
-	border-top: 2px solid black;
-	border-left: 2px solid black;
-	bottom: 0;
-	right: 0;
-	z-index: 0;
-}
-
-.top-right {
-    position: absolute;
-	width: 50%;
-	height: 50%;
-	border-top: 2px solid black;
-	border-right: 2px solid black;
-	bottom: 0;
-	left: 0;
-	z-index: 0;
-}
+// +++ mixins +++
 
 .cross {
 	position: absolute;
-	height: 100%;
 	width: 100%;
+	height: 100%;
+	z-index: -1;
 }
 
-.cross .bl {
-    position: absolute;
-	width: 50%;
+.top {
+	position: absolute;
+	content: "";
+	width: 2px;
 	height: 50%;
-	border-top: 2px solid black;
-	border-right: 1px solid black;
+	background: #000;
+}
+
+.bottom {
+	position: absolute;
+	content: "";
+	width: 2px;
+	height: 50%;
 	bottom: 0;
+	background: #000;
+}
+
+.right {
+	position: absolute;
+	content: "";
+	height: 2px;
+	width: 50%;
+	bottom: 50%;
+	background: #000;
+}
+
+.left {
+	position: absolute;
+	content: "";
+	height: 2px;
+	width: 52%;
 	left: 0;
-	z-index: 0;
+	bottom: 50%;
+	background: #000;
 }
 
-.cross .br {
-    position: absolute;
-	width: 50%;
-	height: 50%;
-	border-top: 2px solid black;
-	border-left: 1px solid black;
-	bottom: 0;
+.horizontal {
+	position: absolute;
+	content: "";
+	height: 2px;
+	width: 100%;
+	bottom: 50%;
 	right: 0;
-	z-index: 0;
+	background: #000;
 }
 
-.cross .tr {
-    position: absolute;
-	width: 50%;
-	height: 50%;
-	border-left: 1px solid black;
-	top: 0;
-	right: 0;
-	z-index: 0;
+.vertical {
+	position: absolute;
+	content: "";
+	width: 2px;
+	height: 100%;
+	background: #000;
 }
 
-.cross .tl {
-    position: absolute;
-	width: 50%;
-	height: 50%;
-	border-right: 1px solid black;
-	top: 0;
-	left: 0;
-	z-index: 0;
+
+// ++ utilities ++
+.top-line {
+	@extend .cross;
+
+	&:after {
+		@extend .bottom;
+	}
 }
 
-.row-1 .square:nth-child(2) {
-	border-left: 1px solid black;
+.top-left-line {
+	@extend .cross;
+
+	&:before{
+		@extend .right;
+	}
+
+	&:after {
+		@extend .bottom;
+	}
+}
+
+.top-right-line {
+	@extend .cross;
+
+	&:before{
+		@extend .left;
+	}
+
+	&:after {
+		@extend .bottom;
+	}
+}
+
+.cross-line {
+	@extend .cross;
+
+	&:before{
+		@extend .horizontal;
+	}
+
+	&:after {
+		@extend .vertical;
+	}
+}
+
+.bottom-left-line {
+	@extend .cross;
+
+	&:before{
+		@extend .right;
+	}
+
+	&:after {
+		@extend .top;
+	}
+}
+
+.bottom-right-line {
+	@extend .cross;
+
+	&:before{
+		@extend .left;
+	}
+
+	&:after {
+		@extend .top;
+	}
+}
+
+.bottom-line {
+	@extend .cross;
+
+	&:after {
+		@extend .top;
+	}
 }

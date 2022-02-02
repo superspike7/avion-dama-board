@@ -2,19 +2,87 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -24,8 +92,17 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -33,16 +110,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: "";
   content: none;
 }
@@ -54,29 +135,29 @@ table {
 
 /* ++++++++++++++++++++++++++++++++++++++ */
 .main {
+  background-color: #11111115;
+}
+
+.main {
   height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.board {
+.main .board {
   width: 800px;
   height: 800px;
-  border: 2px black solid;
   display: flex;
   flex-direction: column;
 }
-
-.row {
+.main .board .row {
   height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-
-.square {
+.main .board .row .square {
   font-size: 3em;
   width: 100px;
   display: flex;
@@ -87,87 +168,65 @@ table {
   z-index: -2;
 }
 
-.line {
+.cross, .bottom-line, .bottom-right-line, .bottom-left-line, .cross-line, .top-right-line, .top-left-line, .top-line {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.top, .bottom-line:after, .bottom-right-line:after, .bottom-left-line:after {
+  position: absolute;
+  content: "";
   width: 2px;
   height: 50%;
-  bottom: 0;
-  z-index: -1;
   background: #000;
 }
 
-.top-left {
+.bottom, .top-right-line:after, .top-left-line:after, .top-line:after {
   position: absolute;
-  width: 50%;
+  content: "";
+  width: 2px;
   height: 50%;
-  border-top: 2px solid black;
-  border-left: 2px solid black;
   bottom: 0;
-  right: 0;
-  z-index: 0;
+  background: #000;
 }
 
-.top-right {
+.right, .bottom-left-line:before, .top-left-line:before {
   position: absolute;
+  content: "";
+  height: 2px;
   width: 50%;
-  height: 50%;
-  border-top: 2px solid black;
-  border-right: 2px solid black;
-  bottom: 0;
+  bottom: 50%;
+  background: #000;
+}
+
+.left, .bottom-right-line:before, .top-right-line:before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 52%;
   left: 0;
-  z-index: 0;
+  bottom: 50%;
+  background: #000;
 }
 
-.cross {
+.horizontal, .cross-line:before {
   position: absolute;
-  height: 100%;
+  content: "";
+  height: 2px;
   width: 100%;
-}
-
-.cross .bl {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  border-top: 2px solid black;
-  border-right: 1px solid black;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.cross .br {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  border-top: 2px solid black;
-  border-left: 1px solid black;
-  bottom: 0;
+  bottom: 50%;
   right: 0;
-  z-index: 0;
+  background: #000;
 }
 
-.cross .tr {
+.vertical, .cross-line:after {
   position: absolute;
-  width: 50%;
-  height: 50%;
-  border-left: 1px solid black;
-  top: 0;
-  right: 0;
-  z-index: 0;
-}
-
-.cross .tl {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  border-right: 1px solid black;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.row-1 .square:nth-child(2) {
-  border-left: 1px solid black;
+  content: "";
+  width: 2px;
+  height: 100%;
+  background: #000;
 }
 
 /*# sourceMappingURL=styles.css.map */
